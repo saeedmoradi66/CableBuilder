@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "CableBuilder"
+    }
+  },
+  "defaultProject": "CableBuilder",
+  "cli": {
+    "analytics": "f2b0a0f6-07d8-4107-a84b-91d850b65371"
+  }
 }

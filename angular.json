@@ -24,9 +24,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/assets/dist/css/bootstrap.min.css",
+              "src/assets/dist/css/navbar-top-fixed.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.slim.min.js",
+              "src/assets/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -87,10 +91,14 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": []
+           "styles": [
+            "src/assets/dist/css/bootstrap.min.css",
+            "src/assets/dist/css/navbar-top-fixed.css"
+          ],
+          "scripts": [
+            "node_modules/jquery/dist/jquery.slim.min.js",
+            "src/assets/dist/js/bootstrap.bundle.min.js"
+          ]
           }
         },
         "lint": {

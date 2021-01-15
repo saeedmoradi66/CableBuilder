@@ -12,7 +12,8 @@ import { ErrorPageComponent } from './layout/error-page/error-page.component';
 import { NOETCaptchaComponent } from './noetcaptcha/noetcaptcha.component';
 import { LoginComponent } from './login/login.component';
 import { ExpireComponent } from './expire/expire.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 
 
@@ -25,8 +26,9 @@ import { ExpireComponent } from './expire/expire.component';
     DashboardModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialModule
 
   ],
   exports: [],

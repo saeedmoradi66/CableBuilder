@@ -1,0 +1,81 @@
+<mat-card class="example-card">
+    <mat-card-header>
+
+        <mat-card-title>Dashboard</mat-card-title>
+        <mat-card-subtitle>Cable design steps</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div class="row text-center" style="margin:auto">
+
+            <div class="col-sm-2 text-center"
+                [ngClass]="{'nostart':model.general==0,'inprogress':model.general==1,'done':model.general==2}">
+                <p class="stageTitle"> General </p>
+                <a class="stageLink" routerLink="/dashboard/general"></a>
+            </div>
+
+            <div class="col-sm-2"
+                [ngClass]="{'nostart':model.crossSection==0,'inprogress':model.crossSection==1,'done':model.crossSection==2}">
+                <p class="stageTitle"> Number of strings and cross section </p>
+                <a class="stageLink" routerLink="/dashboard/CrossSection"></a>
+            </div>
+            <div class="col-sm-2"
+                [ngClass]="{'nostart':model.conductor==0,'inprogress':model.conductor==1,'done':model.conductor==2}">
+                <p class="stageTitle"> Conductor </p>
+                <a class="stageLink" routerLink="/dashboard/Conductor"></a>
+            </div>
+            <div class="col-sm-2 "
+                [ngClass]="{'nostart':model.mica==0,'inprogress':model.mica==1,'done':model.mica==2}">
+                <p class="stageTitle"> Mica </p>
+                <a class="stageLink" routerLink="/dashboard/Mica"></a>
+            </div>
+            <div class="col-sm-2 "
+                [ngClass]="{'nostart':model.insulation==0,'inprogress':model.insulation==1,'done':model.insulation==2}">
+                <p class="stageTitle"> Insulation </p>
+                <a class="stageLink" routerLink="/dashboard/Insulation"></a>
+            </div>
+            <div class="col-sm-2 "
+                [ngClass]="{'nostart':model.yarn==0,'inprogress':model.yarn==1,'done':model.yarn==2}">
+                <p class="stageTitle"> Yarn And PP Tape </p>
+                <a class="stageLink" routerLink="/dashboard/Yarn"></a>
+            </div>
+            <div class="col-sm-2 "
+                [ngClass]="{'nostart':model.innerSheath==0,'inprogress':model.innerSheath==1,'done':model.innerSheath==2}">
+                <p class="stageTitle"> Inner Sheath One For Sheild Screen </p>
+                <a class="stageLink" routerLink="/dashboard/InnerSheath"></a>
+            </div>
+            <div class="col-sm-2 "
+                [ngClass]="{'nostart':model.sheildScreen==0,'inprogress':model.sheildScreen==1,'done':model.sheildScreen==2}">
+                <p class="stageTitle"> Sheild Screen </p>
+                <a class="stageLink" routerLink="/dashboard/SheildScreen"></a>
+            </div>
+            <div class="col-sm-2 "
+                [ngClass]="{'nostart':model.innerLead==0,'inprogress':model.innerLead==1,'done':model.innerLead==2}">
+                <p class="stageTitle"> Inner Sheath For Lead Sheath </p>
+                <a class="stageLink" routerLink="/dashboard/InnerLead"></a>
+            </div>
+            <div class="col-sm-2 "
+                [ngClass]="{'nostart':model.leadSheath==0,'inprogress':model.leadSheath==1,'done':model.leadSheath==2}">
+                <p class="stageTitle"> Lead sheath </p>
+                <a class="stageLink" routerLink="/dashboard/LeadSheath"></a>
+            </div>
+            <div class="col-sm-2 "
+                [ngClass]="{'nostart':model.bedding==0,'inprogress':model.bedding==1,'done':model.bedding==2}">
+                <p class="stageTitle"> Bedding </p>
+                <a class="stageLink" routerLink="/dashboard/Bedding"></a>
+            </div>
+            <div class="col-sm-2 "
+                [ngClass]="{'nostart':model.armour==0,'inprogress':model.armour==1,'done':model.armour==2}">
+                <p class="stageTitle"> Armour </p>
+                <a class="stageLink" routerLink="/dashboard/Armour"></a>
+            </div>
+            <div class="col-sm-2 "
+                [ngClass]="{'nostart':model.outher==0,'inprogress':model.outher==1,'done':model.outher==2}">
+                <p class="stageTitle"> Outher Sheath </p>
+                <a class="stageLink" routerLink="/dashboard/Outher"></a>
+            </div>
+
+        </div>
+    </mat-card-content>
+
+</mat-card>

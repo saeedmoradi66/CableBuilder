@@ -1,0 +1,50 @@
+<mat-card class="Designcard">
+    <mat-card-header>
+
+        <mat-card-title>General</mat-card-title>
+
+    </mat-card-header>
+
+    <mat-card-content>
+        <div class="container">
+
+            <form action="/action_page.php">
+                <div class="form-group">
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Cable Type</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let item of cableTypeList" [value]="item.id">
+                                {{item.title}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Standard</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let item of standardList" [value]="item.standardId">
+                                {{item.standardTitle}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Voltage</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let item of voltageList" [value]="item.voltageId">
+                                {{item.voltageTitle}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <button mat-raised-button color="primary">Primary</button>
+            </form>
+        </div>
+    </mat-card-content>
+
+</mat-card>

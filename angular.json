@@ -24,8 +24,11 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/assets/dist/css/bootstrap.min.css",
-              "src/assets/dist/css/navbar-top-fixed.css"
+              "src/assets/dist/css/navbar-top-fixed.css",
+              "src/assets/dist/css/font.css",
+              "src/assets/dist/css/font-awesome.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.min.js",
@@ -91,14 +94,17 @@
               "src/favicon.ico",
               "src/assets"
             ],
-           "styles": [
-            "src/assets/dist/css/bootstrap.min.css",
-            "src/assets/dist/css/navbar-top-fixed.css"
-          ],
-          "scripts": [
-            "node_modules/jquery/dist/jquery.slim.min.js",
-            "src/assets/dist/js/bootstrap.bundle.min.js"
-          ]
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/assets/dist/css/bootstrap.min.css",
+              "src/assets/dist/css/navbar-top-fixed.css",
+              "src/assets/dist/css/font.css",
+              "src/assets/dist/css/font-awesome.min.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.slim.min.js",
+              "src/assets/dist/js/bootstrap.bundle.min.js"
+            ]
           }
         },
         "lint": {

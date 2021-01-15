@@ -1,46 +1,30 @@
-import { Injectable, Inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { APP_CONFIG, IAppConfig } from './app.config';
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ApplicantModel } from '../models/ApplicantModel';
+import { Dashboard } from '../models/Dashboard';
+import { APP_CONFIG, IAppConfig } from './app.config';
+
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class DashboardService {
-  constructor(
-    private http: HttpClient,
-    @Inject(APP_CONFIG) private appConfig: IAppConfig
-  ) {}
 
-  getImage(): any {
-    return this.http.get(
-      `${this.appConfig.apiEndpoint}/` + 'dashboard/GetImage'
-    );
-  }
+  constructor(private http: HttpClient,
 
-  GetUserInfo(): Observable<any> {
+    @Inject(APP_CONFIG) private appConfig: IAppConfig) { }
+  
+  Get(model: Dashboard): Observable<Dashboard> {
+    
     return this.http
-      .get<any>(
-        `${this.appConfig.apiEndpoint}/` + 'Dashboard/GetUserInfo'
-      )
+      .post(`${this.appConfig.apiEndpoint}/` + 'dashboard/Get', model)
       .pipe(
-        map((res) => {
-          return res;
-        })
+        map((response: any) => {
+          return response;
+        }),
+
       );
   }
 
-  GetMenu(): Observable<ApplicantModel> {
-    return this.http
-      .get<ApplicantModel>(
-        `${this.appConfig.apiEndpoint}/` + 'Dashboard/GetMenu'
-      )
-      .pipe(
-        map((res) => {
-          return res;
-        })
-      );
-  }
 }

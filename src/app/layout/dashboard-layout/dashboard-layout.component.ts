@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GlobalService } from 'src/app/core';
+import { AuthService, GlobalService } from 'src/app/core';
 
 
 @Component({
@@ -8,11 +8,18 @@ import { GlobalService } from 'src/app/core';
   styleUrls: ['./dashboard-layout.component.css']
 })
 export class DashboardLayoutComponent implements OnInit {
- 
-  constructor(private global: GlobalService) { }
 
+  constructor(private global: GlobalService, private authService: AuthService) { }
+  currentYear: number;
+  userName: string;
   ngOnInit(): void {
-    this.global.loadScript();
+    this.currentYear = (new Date()).getFullYear();
+    
+    this.global.FullName = this.userName = this.authService.getAuthUser().displayName;
   }
 
+
+  logout() {
+    this.authService.logout(true);
+  }
 }

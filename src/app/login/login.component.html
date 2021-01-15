@@ -1,114 +1,57 @@
-<div class="row">
-  <div class="col-lg-12">
-    <ul class="breadcrumb">
-      <li>
-        <a routerLink="/" routerLinkActive="router-link-active">صفحه اصلی</a>
-      </li>
-      <li class="active">قبلا ثبت نام کرده ام</li>
-    </ul>
-  </div>
-</div>
+<div class="text-center">
+  <mat-card class="login-card">
+    <mat-card-header>
 
-<div class="row">
-  <div class="col-sm-6 col-sm-offset-3">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">قبلا ثبت نام کرده ام</h3>
-      </div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="alert alert-info">
-              <span id="helpBlock" class="help-block">
-                داوطلب گرامی، برای استفاده از سرویس های مربوط وارد سیستم شوید.
-              </span>
-            </div>
-          </div>
+      <mat-card-title></mat-card-title>
+
+    </mat-card-header>
+
+    <mat-card-content>
+      <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="submitForm()" novalidate>
+
+        <h1 class="h3 mb-3 font-weight-normal">Cable Builder</h1>
+        <mat-form-field class="login-full-width">
+          <mat-label>UserName</mat-label>
+          <input matInput formControlName="username" placeholder="Ex. user1">
+          <mat-error *ngIf="!loginForm.controls.username.hasError('minlength')">
+            Please enter min 5 char
+          </mat-error>
+          <mat-error *ngIf="loginForm.controls.username.hasError('required')">
+            UserName is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+       
+        <mat-form-field class="login-full-width">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName="password" placeholder="password">
+        
+          <mat-error *ngIf="loginForm.controls.password.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+       
+        <app-noetcaptcha #appDntCaptcha [(inputText)]="model.DNTCaptchaInputText" [(text)]="model.DNTCaptchaText"
+          [(token)]="model.DNTCaptchaToken" [apiUrl]="captchaApiUrl" [backColor]="'#f7f3f3'" [fontName]="'Tahoma'"
+          [fontSize]="18" [foreColor]="'#111111'" [language]="'English'" [max]="100" [min]="1"
+          [placeholder]="'Security Code'">
+        </app-noetcaptcha>
+        <div class="checkbox mb-3">
+          <label>
+            <mat-checkbox  formControlName="rememberMe" >Remember me</mat-checkbox> 
+          </label>
         </div>
-        <fieldset>
-          <form  [formGroup]="loginForm" class="form-horizontal" (ngSubmit)="submitForm()" novalidate>
 
-            <div class="form-group">
-              <label for="serial" class="col-sm-3 control-label">شماره پرونده</label>
-              <div class="col-sm-5">
-                <input type="text" numbersOnly formControlName="voucherID" name="voucherID"
-                  class="form-control text-left" maxlength="7" [class.is-invalid]="
-                    loginForm.controls.voucherID.invalid &&
-                    loginForm.controls.voucherID.touched
-                  " placeholder="شماره پرونده 7 رقمی" />
-                <div *ngIf="
-                    loginForm.controls.voucherID.invalid &&
-                    loginForm.controls.voucherID.touched
-                  ">
-                  <div class="alert alert-danger" *ngIf="loginForm.controls.voucherID.hasError('required')">
-                    شماره پرونده را وارد نمایید
-                  </div>
-                  <div class="alert alert-danger" *ngIf="loginForm.controls.voucherID.hasError('minlength')">
-                    7 عدد وارد نمایید
-                  </div>
-                </div>
-              </div>
-              <span class="col-sm-4">
-                <span class="field-validation-valid" data-valmsg-for="VoucherID" data-valmsg-replace="true"></span>
-              </span>
-            </div>
-            <div class="form-group">
-              <label for="code" class="col-sm-3 control-label">کد پیگیری ثبت نام</label>
-              <div class="col-sm-5">
-                <input numbersOnly class="form-control text-left" formControlName="code" [class.is-invalid]="
-                    loginForm.controls.code.invalid &&
-                    loginForm.controls.code.touched
-                  " maxlength="16" name="code" placeholder="کد پیگیری" type="text" />
-                <div *ngIf="
-                    loginForm.controls.code.invalid &&
-                    loginForm.controls.code.touched
-                  ">
-                  <div class="alert alert-danger" *ngIf="loginForm.controls.code.hasError('required')">
-                    کد پیگیری را وارد نمایید
-                  </div>
-                  <div class="alert alert-danger" *ngIf="loginForm.controls.code.hasError('minlength')">
-                    16 عدد وارد نمایید
-                  </div>
-                </div>
-              </div>
-              <span class="col-sm-4">
-                <span class="field-validation-valid" data-valmsg-for="Code" data-valmsg-replace="true"></span>
-              </span>
-            </div>
+        <button [disabled]="!loginForm.valid  || isLaading" mat-raised-button color="primary">
+          Sign in
+          <i class="fa fa-spinner fa-spin" *ngIf="isLaading"></i>
+        </button>
+        <div *ngIf="error" class="alert alert-danger" role="alert ">
+          {{ error }}
+        </div>
 
-            <div class="form-group">
-              <label for="serial" class="col-sm-3 control-label">عبارت امنیتی</label>
-              <div class="col-sm-9">
-                <app-noetcaptcha #appDntCaptcha [(inputText)]="model.DNTCaptchaInputText"
-                  [(text)]="model.DNTCaptchaText" [(token)]="model.DNTCaptchaToken" [apiUrl]="captchaApiUrl"
-                  [backColor]="'#f7f3f3'" [fontName]="'Tahoma'" [fontSize]="18" [foreColor]="'#111111'"
-                  [language]="'English'" [max]="100" [min]="1" [placeholder]="'عبارت امنیتی'"></app-noetcaptcha>
+        <p class="mt-5 mb-3 text-muted">&copy; Alborz Cable</p>
+      </form>
+    </mat-card-content>
 
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="col-sm-offset-3 col-sm-5">
-                <button [disabled]="!loginForm.valid  || isLaading" class="btn btn-primary">
-                  ورود به سیستم
-                  <i class="fa fa-spinner fa-spin" *ngIf="isLaading"></i>
-                </button>
-              </div>
-            </div>
-
-            <div *ngIf="error" class="alert alert-danger" role="alert ">
-              {{ error }}
-            </div>
-          </form>
-        </fieldset>
-      </div>
-      <div class="panel-footer">
-        درصورتی که شماره پرونده ویا کد پیگیری ثبت نام را فراموش نموده اید به
-        <a target="_blank" class="link2" href="http://request.sanjesh.org/noetrequest/login/" dideo-checked="true">
-          سیستم پاسخگویی
-        </a>
-        مراجعه فرمایید
-      </div>
-    </div>
-  </div>
+  </mat-card>
 </div>

@@ -1,6 +1,6 @@
 ﻿import { Injectable, Inject } from '@angular/core';
-import * as jwt_decode from 'jwt-decode';
-
+// @ts-ignore  
+import jwt_decode from "jwt-decode";
 import { AuthTokenType } from './../models/auth-token-type';
 import { ApiConfigService } from './api-config.service';
 import { APP_CONFIG, IAppConfig } from './app.config';
@@ -30,6 +30,7 @@ export class TokenStoreService {
   }
 
   getDecodedAccessToken(): any {
+   
     return jwt_decode(this.getRawAuthToken(AuthTokenType.AccessToken));
   }
 
@@ -64,16 +65,16 @@ export class TokenStoreService {
       this.browserStorageService.removeLocal(
         AuthTokenType[AuthTokenType.AccessToken]
       );
-      // this.browserStorageService.removeLocal(
-      //   AuthTokenType[AuthTokenType.RefreshToken]
-      // );
+      this.browserStorageService.removeLocal(
+        AuthTokenType[AuthTokenType.RefreshToken]
+      );
     } else {
       this.browserStorageService.removeSession(
         AuthTokenType[AuthTokenType.AccessToken]
       );
-      // this.browserStorageService.removeSession(
-      //   AuthTokenType[AuthTokenType.RefreshToken]
-      // );
+      this.browserStorageService.removeSession(
+        AuthTokenType[AuthTokenType.RefreshToken]
+      );
     }
     this.browserStorageService.removeLocal(this.rememberMeToken);
   }
@@ -122,10 +123,10 @@ export class TokenStoreService {
       AuthTokenType.AccessToken,
       response[this.appConfig.accessTokenObjectKey]
     );
-    // this.setToken(
-    //   AuthTokenType.RefreshToken,
-    //   response[this.appConfig.refreshTokenObjectKey]
-    // );
+    this.setToken(
+      AuthTokenType.RefreshToken,
+      response[this.appConfig.refreshTokenObjectKey]
+    );
   }
 
   rememberMe(): boolean {
@@ -138,10 +139,10 @@ export class TokenStoreService {
 
   hasStoredAccessAndRefreshTokens(): boolean {
     const accessToken = this.getRawAuthToken(AuthTokenType.AccessToken);
-   // const refreshToken = this.getRawAuthToken(AuthTokenType.RefreshToken);
+    const refreshToken = this.getRawAuthToken(AuthTokenType.RefreshToken);
     return (
       !this.utilsService.isEmptyString(accessToken)
-      //&& !this.utilsService.isEmptyString(refreshToken)
+      && !this.utilsService.isEmptyString(refreshToken)
     );
   }
 }

@@ -1,4 +1,4 @@
-export class UniversityModel {
+export class CableTypeModel {
     id: number;
     title: string;
 }

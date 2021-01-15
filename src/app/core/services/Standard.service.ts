@@ -2,23 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CableTypeModel } from '../models/CableTypeModel';
+import { StandardModel } from '../models/StandardModel';
 import { APP_CONFIG, IAppConfig } from './app.config';
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class CourseEducationService {
+export class StandardService {
+  constructor(private http: HttpClient,
 
-  constructor(
-    private http: HttpClient,
+    @Inject(APP_CONFIG) private appConfig: IAppConfig) { }
 
-    @Inject(APP_CONFIG) private appConfig: IAppConfig
-  ) { }
+  Get(): Observable<StandardModel[]> {
 
-  public Search(page: number, keyword: string): Observable<any> {
     return this.http
-      .get(`${this.appConfig.apiEndpoint}/` + 'search/SearchCourseEducation?page=' + page + '&keyword=' + keyword)
+      .get(`${this.appConfig.apiEndpoint}/` + 'Standard/Get')
       .pipe(
         map((response: any) => {
           return response;
@@ -26,7 +25,5 @@ export class CourseEducationService {
 
       );
   }
-
-
 
 }

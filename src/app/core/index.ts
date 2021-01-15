@@ -11,25 +11,19 @@ export * from './services/browser-storage.service';
 export * from './services/refresh-token.service';
 export * from './services/token-store.service';
 export * from './services/utils.service';
-export * from './services/rss.service';
+
 export * from './services/error-handler.service';
 export * from './services/dashboard.service';
-export * from './models/ApplicantModel';
 export * from './services/api-settings.service';
 export * from './Enums/ConfirmUpload';
 export * from './Enums/ResultVoucherState';
-export * from './services/upload.service';
+
 export * from './models/BaseModel';
 export * from './services/router-ext.service';
-export * from './services/voucher.service';
+
 export * from './Enums/NezamState';
 export * from './models/ResponseModel';
-export * from './services/applicant.service';
-export * from './services/city.service';
-export * from './models/CityModel';
-export * from './models/universityModel';
-export * from './services/university.service';
+
 export * from './models/Pager';
-export * from './models/CourseEducationModel';
-export * from './services/CourseEducation.service';
+
 export * from './services/global.service';

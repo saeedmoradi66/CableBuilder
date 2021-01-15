@@ -2,23 +2,23 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UniversityModel } from '../models/universityModel';
+import { CableTypeModel } from '../models/CableTypeModel';
+import { VoltageModel } from '../models/VoltageModel';
 import { APP_CONFIG, IAppConfig } from './app.config';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UniversityService {
+export class VoltageService {
 
-  constructor(
-    private http: HttpClient,
+  constructor(private http: HttpClient,
 
-    @Inject(APP_CONFIG) private appConfig: IAppConfig
-  ) { }
+    @Inject(APP_CONFIG) private appConfig: IAppConfig) { }
 
-  public Search(page:number,keyword:string): Observable<any> {
+  Get(): Observable<VoltageModel[]> {
+
     return this.http
-      .get(`${this.appConfig.apiEndpoint}/` + 'search/SearchUniversity?page='+page+'&keyword=' + keyword)
+      .get(`${this.appConfig.apiEndpoint}/` + 'Voltage/Get')
       .pipe(
         map((response: any) => {
           return response;
@@ -26,6 +26,5 @@ export class UniversityService {
 
       );
   }
-
 
 }

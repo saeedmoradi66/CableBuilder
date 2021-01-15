@@ -32,18 +32,18 @@ export class ErrorIntercept implements HttpInterceptor {
                     } else {
                         // server-side error
                         errorMessage = `Error Status: ${error.error.StatusCode}\nMessage: ${error.error.ErrorMessage}`;
-                        this.authService.logout(false);
-                        if (error.status == 500)
-                            this.router.navigate(['/error']);
-                        else if (error.status == 401)
-                        {
+                        // this.authService.logout(false);
+                        // if (error.status == 500)
+                        //     this.router.navigate(['/error']);
+                        // else if (error.status == 401)
+                        // {
                             
-                            this.router.navigate(['/login/expire'])
-                        }
-                        else if (error.status == 403)
-                            this.router.navigate(['/login/accessDenied'])
-                        else 
-                            this.router.navigate(['/error'])
+                        //     this.router.navigate(['/login/expire'])
+                        // }
+                        // else if (error.status == 403)
+                        //     this.router.navigate(['/login/accessDenied'])
+                        // else 
+                        //     this.router.navigate(['/error'])
                         
                     }
                     console.log(error);

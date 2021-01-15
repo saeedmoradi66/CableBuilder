@@ -10,13 +10,13 @@ import { catchError, finalize, map } from 'rxjs/operators';
 
 import { AuthTokenType } from './../models/auth-token-type';
 import { AuthUser } from './../models/auth-user';
-import { VoucherModel } from './../models/VoucherModel';
 import { ApiConfigService } from './api-config.service';
 import { APP_CONFIG, IAppConfig } from './app.config';
 import { RefreshTokenService } from './refresh-token.service';
 import { TokenStoreService } from './token-store.service';
 import { ResultVoucherState } from '../Enums/ResultVoucherState';
 import { GlobalService } from './global.service';
+import { Credentials } from '../models/credentials';
 
 @Injectable({
   providedIn: 'root',
@@ -35,72 +35,40 @@ export class AuthService {
     private globalService:GlobalService
   ) {
     this.updateStatusOnPageRefresh();
-    // this.refreshTokenService.scheduleRefreshToken(
-    //   this.isAuthUserLoggedIn(),
-    //   false
-    // );
+    this.refreshTokenService.scheduleRefreshToken(
+      this.isAuthUserLoggedIn(),
+      false
+    );
   }
 
-  login(model: VoucherModel): Observable<VoucherModel> {
-    this.globalService.FullName = '';
+  login(credentials: Credentials): Observable<any> {
     const headers = new HttpHeaders({ "Content-Type": "application/json" });
-    return this.http
-      .post(
-        `${this.appConfig.apiEndpoint}/${this.appConfig.NewloginPath}`,
-        model,{ headers: headers, withCredentials: true /* For CORS */ }
-      )
-      .pipe(
-        map((response: any) => {
-          let model: VoucherModel = new VoucherModel();
-
-          model.resultVoucherState = response.resultVoucherState;
-
-          if (response.resultVoucherState != ResultVoucherState.Free) {
-            this.authStatusSource.next(false);
-            return model;
-          }
-          this.tokenStoreService.storeLoginSession(response);
-         
-        //  this.refreshTokenService.scheduleRefreshToken(true, true);
-          this.authStatusSource.next(true);
-
-          model.resultVoucherState = response.resultVoucherState;
-
-          return model;
-        }),
-        
-      );
-  }
-
-  Editlogin(credentials: VoucherModel): Observable<VoucherModel> {
-    this.globalService.FullName = '';
+    console.log(this.appConfig.apiEndpoint+'/'+this.appConfig.loginPath);
     return this.http
       .post(
         `${this.appConfig.apiEndpoint}/${this.appConfig.loginPath}`,
-        credentials
+        credentials,
+        { headers: headers }
       )
       .pipe(
         map((response: any) => {
-          let model: VoucherModel = new VoucherModel();
-
-          model.resultVoucherState = response.resultVoucherState;
-          model.editedNo = response.editedNo;
-          if (response.resultVoucherState != ResultVoucherState.Registered) {
+          this.tokenStoreService.setRememberMe(credentials.rememberMe);
+          if (response.result!=1) {
+           
             this.authStatusSource.next(false);
-            return model;
+            return response;
           }
           this.tokenStoreService.storeLoginSession(response);
-         
-        //  this.refreshTokenService.scheduleRefreshToken(true, true);
+          console.log("Logged-in user info", this.getAuthUser());
+          this.refreshTokenService.scheduleRefreshToken(true, true);
           this.authStatusSource.next(true);
-
-          model.resultVoucherState = response.resultVoucherState;
-          model.editedNo = response.editedNo;
-          return model;
+          return true;
         }),
-        
+        catchError((error: HttpErrorResponse) => throwError(error))
       );
   }
+
+  
 
   getBearerAuthHeader(): HttpHeaders {
     return new HttpHeaders({
@@ -127,7 +95,7 @@ export class AuthService {
        // catchError(this.ShowError),
         finalize(() => {
           this.tokenStoreService.deleteAuthTokens();
-         // this.refreshTokenService.unscheduleRefreshToken(true);
+          this.refreshTokenService.unscheduleRefreshToken(true);
           this.authStatusSource.next(false);
           if (navigateToHome) {
             this.router.navigate(['/']);
@@ -156,11 +124,14 @@ export class AuthService {
     return Object.freeze({
       userId:
         decodedToken[
-        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
         ],
-      userName: '',
-      displayName:'',
-      roles,
+      userName:
+        decodedToken[
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+        ],
+      displayName: decodedToken["DisplayName"],
+      roles: roles,
     });
   }
 
@@ -183,9 +154,7 @@ export class AuthService {
     });
   }
 
-  public getIPAddress(): any {
-    return this.http.get('http://api.ipify.org/?format=json');
-  }
+  
 
   isAuthUserInRole(requiredRole: string): boolean {
     return this.isAuthUserInRoles([requiredRole]);

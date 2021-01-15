@@ -1,0 +1,27 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+.col-sm-5 {
+  margin: 15px;
+}
+
+.label {
+  color: blue;
+  font-weight: bold;
+}
+
+.fieldValue {
+  color: green;
+  font-weight: bold;
+}

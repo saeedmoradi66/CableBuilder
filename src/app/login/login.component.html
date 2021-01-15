@@ -41,9 +41,9 @@
           </label>
         </div>
 
-        <button [disabled]="!loginForm.valid  || isLaading" mat-raised-button color="primary">
+        <button [disabled]="!loginForm.valid  || isLoading" mat-raised-button color="primary">
           Sign in
-          <i class="fa fa-spinner fa-spin" *ngIf="isLaading"></i>
+          <i class="fa fa-spinner fa-spin" *ngIf="isLoading"></i>
         </button>
         <div *ngIf="error" class="alert alert-danger" role="alert ">
           {{ error }}

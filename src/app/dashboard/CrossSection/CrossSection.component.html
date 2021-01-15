@@ -1,0 +1,119 @@
+<div class="app-page-title">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+
+      <div>Cross Section
+        <div class="page-title-subheading">Tables are the backbone of almost all web applications.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<mat-card class="Designcard">
+
+
+  <mat-card-content>
+    <div class="container">
+
+      <form class="form-signin" [formGroup]="form1" (ngSubmit)="submitForm()" novalidate>
+
+        <div class="row text-center" style="margin:auto">
+
+          <div class="col-sm-5 text-center">
+            <mat-form-field appearance="fill">
+              <mat-label>Number Of Core Phase</mat-label>
+              <select matNativeControl formControlName="numberCorePhaseID">
+                <option *ngFor="let item of numberCorePhaseList" [value]="item.numberCorePhaseID">
+                  {{item.numberCorePhaseTitle}}
+                </option>
+              </select>
+              <mat-error *ngIf="numberCorePhaseID.hasError('required')">Please choose an number of Core Phase
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-5 ">
+            <mat-form-field appearance="fill">
+              <mat-label>Cross Section Of Phase</mat-label>
+              <select matNativeControl formControlName="crossSectionPhaseID">
+                <option *ngFor="let item of crossSectionPhaseList" [value]="item.crossSectionPhaseID">
+                  {{item.crossSectionPhaseTitle}}
+                </option>
+              </select>
+              <mat-error *ngIf="crossSectionPhaseID.hasError('required')">Please choose an cross Section of Phase
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-5">
+            <mat-form-field appearance="fill">
+              <mat-label>Number Of Core Null</mat-label>
+              <select matNativeControl formControlName="numberCoreNullID">
+                <option *ngFor="let item of numberCoreNullList" [value]="item.numberCoreNullID">
+                  {{item.numberCoreNullTitle}}
+                </option>
+              </select>
+              <mat-error *ngIf="numberCoreNullID.hasError('required')">Please choose an number of Core Null
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-5 ">
+            <mat-form-field appearance="fill">
+              <mat-label>Cross Section Of Null</mat-label>
+              <select matNativeControl formControlName="crossSectionNullID">
+                <option *ngFor="let item of crossSectionNullList" [value]="item.crossSectionNullID">
+                  {{item.crossSectionNullTitle}}
+                </option>
+              </select>
+              <mat-error *ngIf="crossSectionNullID.hasError('required')">Please choose an cross Section of Null
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-5">
+            <mat-form-field appearance="fill">
+              <mat-label>Number Of Core Earth</mat-label>
+              <select matNativeControl formControlName="numberCoreEarthID">
+                <option *ngFor="let item of numberCoreEarthList" [value]="item.numberCoreEarthID">
+                  {{item.numberCoreEarthTitle}}
+                </option>
+              </select>
+              <mat-error *ngIf="numberCoreEarthID.hasError('required')">Please choose an number of Core Earth
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-5 ">
+            <mat-form-field appearance="fill">
+              <mat-label>Cross Section Of Earth</mat-label>
+              <select matNativeControl formControlName="crossSectionEarthID">
+                <option *ngFor="let item of crossSectionEarthList" [value]="item.crossSectionEarthID">
+                  {{item.crossSectionEarthTitle}}
+                </option>
+              </select>
+              <mat-error *ngIf="crossSectionEarthID.hasError('required')">Please choose an cross Section of Earth
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-12 text-center ">
+            <button mat-raised-button color="primary" [disabled]="isLoading">Save
+              <mat-icon *ngIf="isLoading">
+                <mat-spinner color="accent" diameter="20">
+                </mat-spinner>
+              </mat-icon>
+            </button>
+          </div>
+
+
+        </div>
+      </form>
+      <br>
+      <div *ngIf="isSuccess" class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Success!</strong> Information saved successfully.
+      </div>
+    </div>
+  </mat-card-content>
+
+</mat-card>

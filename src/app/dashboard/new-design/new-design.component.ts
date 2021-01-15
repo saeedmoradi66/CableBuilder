@@ -13,7 +13,7 @@ export class NewDesignComponent implements OnInit {
 
   ngOnInit(): void {
     this.gloabl.CableBuilderNo = 0;
-    this.router.navigate(["/dashboard/general"]);
+    this.router.navigateByUrl("/dashboard/general");
   }
 
 }

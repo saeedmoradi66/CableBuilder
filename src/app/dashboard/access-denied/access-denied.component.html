@@ -1,12 +1,12 @@
 <h1 class="text-danger text-center">
-  <i class="fa fa-ban" aria-hidden="true"></i> دسترسی محدود
+  <i class="fa fa-ban" aria-hidden="true"></i> limited access
 </h1>
 <div class="text-center">
-<p>متاسفانه! شما به این صفحه دسترسی ندارید</p>
+<p>Unfortunately! You do not have access to this page</p>
 
 
 <button *ngIf="!isAuthenticated" class="btn btn-success" [routerLink]="['/Login']" queryParamsHandling="merge">
-  ورود به سیستم
+ login
 </button>
 </div>
 

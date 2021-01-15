@@ -11,6 +11,11 @@ import { ContinueDesignComponent } from './continue-design/continue-design.compo
 import { GeneralComponent } from './general/general.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { MaterialModule } from '../material.module';
+import { CrossSectionComponent } from './CrossSection/CrossSection.component';
+import { ConductorComponent } from './Conductor/Conductor.component';
+import { ConductorOperationComponent } from './conductor-operation/conductor-operation.component';
+import { UnderConstructionComponent } from './under-construction/under-construction.component';
+
 
 
 @NgModule({
@@ -28,7 +33,7 @@ import { MaterialModule } from '../material.module';
     NewDesignComponent,
     ContinueDesignComponent,
     GeneralComponent,
-    ChangePasswordComponent],
+    ChangePasswordComponent, CrossSectionComponent, ConductorComponent, ConductorOperationComponent, UnderConstructionComponent],
   exports: [],
 })
 export class DashboardModule { }

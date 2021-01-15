@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { ExpireComponent } from './expire/expire.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { APP_BASE_HREF, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 
 

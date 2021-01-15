@@ -1,50 +1,79 @@
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+
+            <div>General
+                <div class="page-title-subheading">Tables are the backbone of almost all web applications.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <mat-card class="Designcard">
-    <mat-card-header>
-
-        <mat-card-title>General</mat-card-title>
-
-    </mat-card-header>
 
     <mat-card-content>
-        <div class="container">
+        <div class="container-fluid">
 
-            <form action="/action_page.php">
-                <div class="form-group">
+            <form class="form-signin" [formGroup]="form1" (ngSubmit)="submitForm()" novalidate>
+                <div class="row text-center" style="margin:auto">
+                    <div class="col-sm-3">
 
-                    <mat-form-field appearance="fill">
-                        <mat-label>Cable Type</mat-label>
-                        <mat-select>
-                            <mat-option *ngFor="let item of cableTypeList" [value]="item.id">
-                                {{item.title}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Cable Type</mat-label>
+                            <select matNativeControl required formControlName="cableType" (change)="changeCableType($event.target.value)" [formControl]="cableType">
+                                <option *ngFor="let item of cableTypeList" [value]="item.id">
+                                    {{item.title}}
+                                </option>
+                            </select>
+                            <mat-error *ngIf="cableType.hasError('required')">Please choose an cableType
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="form-group">
+        
+                <mat-form-field appearance="fill">
+                    <mat-label>Standard</mat-label>
+                    <select matNativeControl required formControlName="standard">
+                        <option *ngFor="let item of standardList" [value]="item.standardId">
+                            {{item.standardTitle}}
+                        </option>
+                    </select>
+                    <mat-error *ngIf="form1.controls.standard.hasError('required')">Please choose an standard
+                    </mat-error>
+                </mat-form-field>
+            </div> -->
+                    <div class="col-sm-3">
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Voltage</mat-label>
+                            <select matNativeControl required formControlName="voltage">
+                                <option vlaue="0">---</option>
+                                <option *ngFor="let item of voltageList" [value]="item.voltageId">
+                                    {{item.voltageTitle}}
+                                </option>
+                            </select>
+                            <mat-error *ngIf="form1.controls.voltage.hasError('required')">Please choose an voltage
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
                 </div>
-                <div class="form-group">
+                <button mat-raised-button color="primary" [disabled]="isLoading">Save
+                    <mat-icon *ngIf="isLoading">
+                        <mat-spinner color="accent" diameter="20">
+                        </mat-spinner>
+                    </mat-icon>
+                </button>
 
-                    <mat-form-field appearance="fill">
-                        <mat-label>Standard</mat-label>
-                        <mat-select>
-                            <mat-option *ngFor="let item of standardList" [value]="item.standardId">
-                                {{item.standardTitle}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div class="form-group">
-
-                    <mat-form-field appearance="fill">
-                        <mat-label>Voltage</mat-label>
-                        <mat-select>
-                            <mat-option *ngFor="let item of voltageList" [value]="item.voltageId">
-                                {{item.voltageTitle}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <button mat-raised-button color="primary">Primary</button>
             </form>
+            <br>
+            <div *ngIf="isSuccess" class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Success!</strong> Information saved successfully.
+            </div>
         </div>
+
     </mat-card-content>
 
 </mat-card>

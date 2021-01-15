@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   @ViewChild("appDntCaptcha") appDntCaptcha: NOETCaptchaComponent;
 
 
-  isLaading: boolean = false;
+  isLoading: boolean = false;
   model: Credentials = { username: "", password: "", rememberMe: false, DNTCaptchaInputText: '', DNTCaptchaText: '', DNTCaptchaToken: '' };
 
 
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm() {
-    this.isLaading = true;
+    this.isLoading = true;
 
 
     this.model.username = this.loginForm.value.username;
@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
        
       }
     );
-    this.isLaading = false;
+    this.isLoading = false;
     this.appDntCaptcha.doRefresh();
   }
 }

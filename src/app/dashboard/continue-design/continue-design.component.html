@@ -6,7 +6,113 @@
     </mat-card-header>
 
     <mat-card-content>
-        <p>continue-design works!</p>
+        <form class="form-signin" [formGroup]="form1" (ngSubmit)="submitForm()" novalidate>
+
+
+            <div class="row text-center" style="margin:auto">
+
+                <div class="col-sm-5 text-center">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>cableBuilderNo</mat-label>
+                        <input type="text" matInput formControlName="cableBuilderNo" placeholder="Ex. low">
+                        
+                    </mat-form-field>
+                </div>
+
+                <div class="col-sm-5">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Cable Type</mat-label>
+                        <select matNativeControl formControlName="cableType">
+                            <option *ngFor="let item of cableTypeList" [value]="item.id">
+                                {{item.title}}
+                            </option>
+                        </select>
+                       
+                    </mat-form-field>
+                </div>
+                <!-- <div class="col-sm-5">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Standard</mat-label>
+                        <select matNativeControl formControlName="standard">
+                            <option *ngFor="let item of standardList" [value]="item.standardId">
+                                {{item.standardTitle}}
+                            </option>
+                        </select>
+                        
+                    </mat-form-field>
+                </div> -->
+                <div class="col-sm-5 ">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Voltage</mat-label>
+                        <select matNativeControl formControlName="voltage">
+                            <option *ngFor="let item of voltageList" [value]="item.voltageId">
+                                {{item.voltageTitle}}
+                            </option>
+                        </select>
+                      
+                    </mat-form-field>
+                </div>
+
+                <div class="col-sm-12 text-center ">
+                    <button mat-raised-button color="primary" [disabled]="isLoading">Search
+                        <mat-icon *ngIf="isLoading">
+                            <mat-spinner color="accent" diameter="20">
+                            </mat-spinner>
+                        </mat-icon>
+                    </button>
+                </div>
+
+
+            </div>
+        </form>
+        <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+        </mat-form-field>
+
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="cableBuilderNo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> CableBuilderNo </th>
+                    <td mat-cell *matCellDef="let row"> {{row.cableBuilderNo}} </td>
+                </ng-container>
+
+                <!-- Progress Column -->
+                <ng-container matColumnDef="voltageTitle">
+                    <th mat-header-cell *matHeaderCellDef > voltage </th>
+                    <td mat-cell *matCellDef="let row"> {{row.voltage.voltageTitle}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="standardTitle">
+                    <th mat-header-cell *matHeaderCellDef > standard </th>
+                    <td mat-cell *matCellDef="let row"> {{row.standard.standardTitle}} </td>
+                </ng-container>
+
+                <!-- Color Column -->
+                <ng-container matColumnDef="title">
+                    <th mat-header-cell *matHeaderCellDef > cableType </th>
+                    <td mat-cell *matCellDef="let row"> {{row.cableType.title}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Continue">
+                    <th mat-header-cell *matHeaderCellDef> Continue </th>
+                    <td mat-cell *matCellDef="let row"> <button mat-raised-button color="accent"
+                            (click)="getRecord(row.cableBuilderNo)">Continue</button> </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="5">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+        </div>
     </mat-card-content>
 
 </mat-card>

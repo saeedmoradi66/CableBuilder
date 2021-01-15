@@ -27,3 +27,4 @@ export * from './models/ResponseModel';
 export * from './models/Pager';
 
 export * from './services/global.service';
+export * from './services/NumberCore.service'

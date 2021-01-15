@@ -27,4 +27,16 @@ export class VoltageService {
       );
   }
 
+  GetByCableType(id:number): Observable<VoltageModel[]> {
+
+    return this.http
+      .get(`${this.appConfig.apiEndpoint}/` + 'Voltage/GetByCableType?id='+id)
+      .pipe(
+        map((response: any) => {
+          return response;
+        }),
+
+      );
+  }
+
 }

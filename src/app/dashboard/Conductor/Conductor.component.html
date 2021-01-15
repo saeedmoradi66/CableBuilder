@@ -1,0 +1,1071 @@
+<div class="app-page-title">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+
+      <div>Conductor
+        <div class="page-title-subheading">Insert and Update Conductor Form.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<mat-card class="Designcard">
+
+
+  <mat-card-content>
+
+    <div class="alert alert-danger" *ngIf="isValid==false">
+
+
+      You must first complete the previous steps, then enter this form
+    </div>
+    <div class="text-center" style="font-weight: bold;
+    color: #3f51b5;
+    font-size: 16px;">{{conductorCode}}</div>
+    <mat-horizontal-stepper linear #stepper *ngIf="isValid">
+      <!-- #docregion editable -->
+      <mat-step [stepControl]="form1">
+        <!-- #enddocregion editable -->
+        <form class="form-signin" [formGroup]="form1" (ngSubmit)="submitForm()" novalidate>
+          <!-- #docregion step-label -->
+          <ng-template matStepLabel>Fill Conductor Form</ng-template>
+          <!-- #enddocregion step-label -->
+          <div class="row text-center" style="margin:auto">
+            <div class="col-sm-3 text-left ">
+
+
+              <!-- <mat-slide-toggle color="primary" formControlName="compaction">Compaction</mat-slide-toggle> -->
+              <mat-form-field appearance="fill">
+                <mat-label> Compaction</mat-label>
+                <select matNativeControl (change)="changeCompaction($event.target.value)"
+                  formControlName="compactionID">
+                  <option *ngFor="let item of compactionList" [value]="item.compactionID">
+                    {{item.compactionTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="compactionID.hasError('required')">Please choose an Compaction
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+            <div class="col-sm-3">
+              <mat-form-field appearance="fill">
+                <mat-label> Class</mat-label>
+                <select matNativeControl (change)="FilterCross($event.target.value)" formControlName="conductorClassID">
+                  <option *ngFor="let item of ConductorClassList" [value]="item.conductorClassId">
+                    {{item.conductorClassTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="conductorClassID.hasError('required')">Please choose an Class
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label> Material</mat-label>
+                <select matNativeControl (change)="changeMaterial($event.target.value)"
+                  formControlName="conductorMaterialID">
+                  <option *ngFor="let item of ConductorMaterialList" [value]="item.conductorMaterialId">
+                    {{item.conductorMaterialTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="conductorMaterialID.hasError('required')">Please choose an Material
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>Cross Section</mat-label>
+                <select matNativeControl (change)="changeCross($event.target.value)" formControlName="crossSectionID">
+                  <option value="0">---</option>
+                  <option *ngFor="let item of CrossSectionList" [value]="item.crossSectionID">
+
+                    {{item.crossSectionTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="crossSectionID.hasError('required')">Please choose an Cross Section
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label> Type</mat-label>
+                <select matNativeControl formControlName="conductorTypeID">
+                  <option *ngFor="let item of ConductorTypeList" [value]="item.conductorTypeId">
+                    {{item.conductorTypeTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="conductorTypeID.hasError('required')">Please choose an Type
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>Standard</mat-label>
+                <select matNativeControl formControlName="standardID">
+                  <option *ngFor="let item of StandardList" [value]="item.standardId">
+                    {{item.standardTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="standardID.hasError('required')">Please choose an Standard
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>Product</mat-label>
+                <select matNativeControl formControlName="productsID">
+                  <option *ngFor="let item of productsList" [value]="item.productsID">
+                    {{item.productTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="productsID.hasError('required')">Please choose an Product
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3 text-center">
+              <mat-form-field appearance="fill">
+                <mat-label> Shape</mat-label>
+                <select matNativeControl formControlName="conductorShapeID" [disabled]="true">
+                  <option value="0">---</option>
+                  <option *ngFor="let item of ConductorShapeList" [value]="item.conductorShapeId">
+                    {{item.conductorShapeTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="conductorShapeID.hasError('required')">Please choose an Shape
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label> Abbreviation</mat-label>
+                <select matNativeControl formControlName="abbreviationID" [disabled]="true">
+                  <option value="0">---</option>
+                  <option *ngFor="let item of abbreviationList" [value]="item.abbreviationID">
+                    {{item.abbreviationTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="abbreviationID.hasError('required')">Please choose an Abbreviation
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label> No Of Wire</mat-label>
+                <select matNativeControl formControlName="numberWireID" [disabled]="true">
+                  <option value="0">---</option>
+                  <option *ngFor="let item of numberWireList" [value]="item.numberWireID">
+                    {{item.numberWireTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="numberWireID.hasError('required')">Please choose an No Of Wire
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label> Wire Diameter</mat-label>
+                <select matNativeControl formControlName="wireDiameterID" [disabled]="true">
+                  <option value="0">---</option>
+                  <option *ngFor="let item of wireDiameterList" [value]="item.wireDiameterID">
+                    {{item.wireDiameterTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="wireDiameterID.hasError('required')">Please choose an Wire Diameter
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label> Density</mat-label>
+                <select matNativeControl formControlName="densityID" [disabled]="true">
+                  <option value="0">---</option>
+                  <option *ngFor="let item of densityList" [value]="item.densityID">
+                    {{item.densityTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="densityID.hasError('required')">Please choose an Density
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+              <mat-form-field appearance="fill">
+                <mat-label> Resistance</mat-label>
+                <select matNativeControl formControlName="ohmicResistanceID" [disabled]="true">
+                  <option value="0">---</option>
+                  <option *ngFor="let item of OhmicResistanceList" [value]="item.ohmicResistanceID">
+                    {{item.ohmicResistanceTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="ohmicResistanceID.hasError('required')">Please choose an Resistance
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>Weight</mat-label>
+                <select matNativeControl formControlName="weightID" [disabled]="true">
+                  <option value="0">---</option>
+                  <option *ngFor="let item of WeightList" [value]="item.weightID">
+                    {{item.weightTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="weightID.hasError('required')">Please choose an Weight
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>Exact dia</mat-label>
+                <select matNativeControl formControlName="conductorActualDiameterID" [disabled]="true">
+                  <option value="0">---</option>
+                  <option *ngFor="let item of ConductorActualDiameterList" [value]="item.conductorActualDiameterID">
+                    {{item.conductorActualDiameterTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="conductorActualDiameterID.hasError('required')">Please choose an Exact
+                  Diameter
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>Width Exact dia</mat-label>
+                <select matNativeControl formControlName="minExDiaID" [disabled]="true">
+                  <option value="0">---</option>
+                  <option *ngFor="let item of minExDiaList" [value]="item.conductorActualDiameterID">
+                    {{item.conductorActualDiameterTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="conductorActualDiameterID.hasError('required')">Please choose an Width Exact
+                  Diameter
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>Height Exact dia</mat-label>
+                <select matNativeControl formControlName="maxExDiaID" [disabled]="true">
+                  <option value="0">---</option>
+                  <option *ngFor="let item of maxExDiaList" [value]="item.conductorActualDiameterID">
+                    {{item.conductorActualDiameterTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="conductorActualDiameterID.hasError('required')">Please choose an Height Exact
+                  Diameter
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>Fic dia</mat-label>
+                <select matNativeControl formControlName="hypotheticalDiameterID" [disabled]="true">
+                  <option value="0">---</option>
+                  <option *ngFor="let item of HypotheticalDiameterList" [value]="item.hypotheticalDiameterID">
+                    {{item.hypotheticalDiameterTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="hypotheticalDiameterID.hasError('required')">Please choose an Fic Diameter
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>No Of Strand</mat-label>
+                <select matNativeControl formControlName="strandNoID">
+                  <option *ngFor="let item of StrandNoList" [value]="item.strandNoID">
+                    {{item.strandNoTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="strandNoID.hasError('required')">Please choose an Strand No
+                </mat-error>
+              </mat-form-field>
+            </div> -->
+
+
+
+
+            <!-- <div class="col-sm-3">
+              <mat-form-field appearance="fill">
+                <mat-label>Unit Resistance</mat-label>
+                <select matNativeControl formControlName="ohmicResistanceUnitID">
+                  <option *ngFor="let item of OhmicResistanceUnitList" [value]="item.ohmicResistanceUnitID">
+                    {{item.ohmicResistanceUnitTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="ohmicResistanceUnitID.hasError('required')">Please choose an Unit Ohmic Resistance
+                </mat-error>
+              </mat-form-field>
+            </div> -->
+
+
+            <!-- <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>Unit Weight</mat-label>
+                <select matNativeControl formControlName="weightUnitID">
+                  <option *ngFor="let item of WeightUnitList" [value]="item.weightUnitID">
+                    {{item.weightUnitTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="weightUnitID.hasError('required')">Please choose an Unit Weight
+                </mat-error>
+              </mat-form-field>
+            </div> -->
+
+
+
+            <!-- <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>Unit Exact dia</mat-label>
+                <select matNativeControl formControlName="conductorActualDiameterUnitID">
+                  <option *ngFor="let item of ConductorActualDiameterUnitList"
+                    [value]="item.conductorActualDiameterUnitID">
+                    {{item.conductorActualDiameterUnitTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="conductorActualDiameterUnitID.hasError('required')">Please choose an Unit Exact
+                  Diameter
+                </mat-error>
+              </mat-form-field>
+            </div> -->
+
+            <!-- <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>Unit Fic dia</mat-label>
+                <select matNativeControl formControlName="hypotheticalDiameterUnitID">
+                  <option *ngFor="let item of HypotheticalDiameterUnitList" [value]="item.hypotheticalDiameterUnitID">
+                    {{item.hypotheticalDiameterUnitTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="hypotheticalDiameterUnitID.hasError('required')">Please choose an Unit Fic
+                  Diameter
+                </mat-error>
+              </mat-form-field>
+            </div> -->
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>Wastage</mat-label>
+                <select matNativeControl formControlName="wastageID" [disabled]="true">
+                  <option *ngFor="let item of WastageList" [value]="item.wastageID">
+                    {{item.wastageTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="wastageID.hasError('required')">Please choose an Wastage
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>Unit Wastage</mat-label>
+                <select matNativeControl formControlName="wastageUnitID">
+                  <option *ngFor="let item of WastageUnitList" [value]="item.wastageUnitID">
+                    {{item.wastageUnitTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="wastageUnitID.hasError('required')">Please choose an Unit Wastage
+                </mat-error>
+              </mat-form-field>
+            </div> -->
+            <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>Price</mat-label>
+                <select matNativeControl formControlName="priceID" [disabled]="true">
+                  <option *ngFor="let item of PriceList" [value]="item.priceID">
+                    {{item.priceTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="priceID.hasError('required')">Please choose an Price
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>Unit Price</mat-label>
+                <select matNativeControl formControlName="priceUnitID">
+                  <option *ngFor="let item of PriceUnitList" [value]="item.priceUnitID">
+                    {{item.priceUnitTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="priceUnitID.hasError('required')">Please choose an Unit Price
+                </mat-error>
+              </mat-form-field>
+            </div> -->
+
+
+
+            <!-- <div class="col-sm-3 ">
+              <mat-form-field appearance="fill">
+                <mat-label>String Diameter</mat-label>
+                <select matNativeControl formControlName="stringDiameterID">
+                  <option *ngFor="let item of StringDiameterList" [value]="item.stringDiameterID">
+                    {{item.stringDiameterTitle}}
+                  </option>
+                </select>
+                <mat-error *ngIf="stringDiameterID.hasError('required')">Please choose an String Diameter
+                </mat-error>
+              </mat-form-field>
+            </div> -->
+
+
+          </div>
+          <div>
+            <button mat-raised-button matStepperNext color="primary" [disabled]="!form1.valid || isLoading">Save
+              <mat-icon *ngIf="isLoading">
+                <mat-spinner color="accent" diameter="20">
+                </mat-spinner>
+              </mat-icon>
+            </button>
+
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+
+        <ng-template matStepLabel>Preview Conductor</ng-template>
+
+        <div class="row text-center" style="margin:auto" *ngIf="previewModel!=null">
+          <table class="table table-striped table-bordered">
+            <tbody>
+              <tr>
+                <td>Class</td>
+                <td>{{previewModel.conductorClass.conductorClassTitle}}</td>
+                <td>Cross Section</td>
+                <td>{{previewModel.crossSection.crossSectionTitle}}</td>
+              </tr>
+              <tr>
+                <td>Material</td>
+                <td>{{previewModel.conductorMaterial.conductorMaterialTitle}}</td>
+                <td>Shape</td>
+                <td>{{previewModel.conductorShape.conductorShapeTitle}}</td>
+              </tr>
+              <tr>
+                <td>Type</td>
+                <td>{{previewModel.conductorType.conductorTypeTitle}}</td>
+                <td>No Of Wire</td>
+                <td>
+                  <span *ngIf="previewModel.numberWire!=null;else noNumberWire">
+                    {{previewModel.numberWire.numberWireTitle}}
+                  </span>
+                  <ng-template #noNumberWire>
+                    <span>
+                      ---
+                    </span>
+                  </ng-template>
+
+                </td>
+              </tr>
+              <tr>
+                <td>Wire Diameter</td>
+                <td>{{previewModel.wireDiameter.wireDiameterTitle}}</td>
+                <td>Abbreviation</td>
+                <td>{{previewModel.abbreviation.abbreviationTitle}}</td>
+              </tr>
+              <tr>
+                <td>Density</td>
+                <td>{{previewModel.density.densityTitle}}</td>
+                <td>Resistance</td>
+                <td>
+
+                  <span *ngIf="previewModel.ohmicResistance!=null;else noRes">
+                    {{previewModel.ohmicResistance.ohmicResistanceTitle}}
+                  </span>
+                  <ng-template #noRes>
+                    <span>
+                      ---
+                    </span>
+                  </ng-template>
+
+                </td>
+              </tr>
+              <tr>
+                <td>Weight</td>
+                <td>{{previewModel.weight.weightTitle}}</td>
+                <td>Exact Diameter</td>
+                <td>
+
+                  <span *ngIf="previewModel.conductorActualDiameter!=null;else noEX">
+                    {{previewModel.conductorActualDiameter.conductorActualDiameterTitle}}
+                  </span>
+                  <ng-template #noEX>
+                    <span>
+                      ---
+                    </span>
+                  </ng-template>
+                </td>
+              </tr>
+              <tr>
+                <td>Fic Diameter</td>
+                <td>{{previewModel.hypotheticalDiameter.hypotheticalDiameterTitle}}
+                </td>
+                <td>Standard</td>
+                <td>{{previewModel.standard.standardTitle}}</td>
+              </tr>
+              <tr>
+                <td>Product</td>
+                <td>{{previewModel.products.productTitle}}</td>
+                <td>Wastage</td>
+                <td>{{previewModel.wastage.wastageTitle}}</td>
+              </tr>
+              <tr>
+                <td>Price</td>
+                <td>{{previewModel.price.priceTitle}}</td>
+                <td>Compaction</td>
+                <td>{{previewModel.compaction.compactionTitle}}</td>
+              </tr>
+
+            </tbody>
+          </table>
+
+
+
+        </div>
+        <div>
+          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button matStepperNext (click)="PreviewConductorOperation()" color="primary">Ok
+          </button>
+        </div>
+
+
+      </mat-step>
+      <mat-step>
+
+        <ng-template matStepLabel>Preview Conductor Operation</ng-template>
+        <div class="row text-center" style="margin:auto" *ngIf="previewOperationModel!=null">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <td>Attribute</td>
+                <td>Value</td>
+                <td>Process name</td>
+                <td>Unit</td>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cross Section</td>
+                <td>{{previewOperationModel.crossSection.crossSectionTitle}}</td>
+                <td> </td>
+                <td>mm2</td>
+
+              </tr>
+              <tr>
+                <td>Resistance </td>
+                <td>{{previewOperationModel.ohmicResistance.ohmicResistanceTitle}}</td>
+                <td> </td>
+                <td>W/km</td>
+
+              </tr>
+              <tr>
+                <td>Number of Wire </td>
+                <td>
+                  {{previewOperationModel.numberWire.numberWireTitle}}
+                </td>
+                <td> </td>
+                <td></td>
+
+              </tr>
+
+              <tr>
+                <td>Wire Diameter </td>
+                <td>
+                  {{previewOperationModel.wireDiameter.wireDiameterTitle}}
+                </td>
+                <td>mm</td>
+                <td></td>
+
+              </tr>
+              <tr>
+                <td>Min. Wire diameter </td>
+                <td>
+                  {{previewOperationModel.wireDiameter.wireDiameterTitle}}
+                </td>
+                <td>mm</td>
+                <td></td>
+
+              </tr>
+              <tr>
+                <td>Max. Wire diameter </td>
+                <td>
+                  {{previewOperationModel.maxWireDiameter}}
+                </td>
+                <td>mm</td>
+                <td></td>
+
+              </tr>
+              <tr>
+                <td>Layer 1 for Stranding/Bunching</td>
+                <td></td>
+                <td>SU,SV,SD</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>No. of wire for each layer </td>
+                <td>7</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Die Diameter</td>
+                <td>{{previewOperationModel.dieDiamater1}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Min. Diameter</td>
+                <td>{{previewOperationModel.dieDiamater1}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Max. Diameter</td>
+                <td>{{previewOperationModel.maxDieDiamater1}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+
+                <td>Lay length</td>
+                <td>{{previewOperationModel.layLength1}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Min. lay length</td>
+                <td>{{ (previewOperationModel.minLayLength1)}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Max. lay length</td>
+                <td>{{ previewOperationModel.maxLayLength1}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Direction</td>
+                <td>{{previewOperationModel.direction1}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <td>Layer 2 for Stranding/Bunching</td>
+                <td></td>
+                <td>SU,SV,SD</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>No. of wire for each layer </td>
+                <td>12</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Die Diameter</td>
+                <td>{{previewOperationModel.dieDiamater2}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Min. Diameter</td>
+                <td>{{previewOperationModel.dieDiamater2}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Max. Diameter</td>
+                <td>{{previewOperationModel.maxDieDiamater2}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Lay length</td>
+                <td>{{previewOperationModel.layLength2}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Min. lay length</td>
+                <td>{{ (previewOperationModel.minLayLength2)}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Max. lay length</td>
+                <td>{{ previewOperationModel.maxLayLength2}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Direction</td>
+                <td>{{previewOperationModel.direction2}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <td>Layer 3 for Stranding/Bunching</td>
+                <td></td>
+                <td>SU,SV,SD</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>No. of wire for each layer </td>
+                <td>18</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Die Diameter</td>
+                <td>{{previewOperationModel.dieDiamater3}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Min. Diameter</td>
+                <td>{{previewOperationModel.dieDiamater3}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Max. Diameter</td>
+                <td>{{previewOperationModel.maxDieDiamater3}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Lay length</td>
+                <td>{{previewOperationModel.layLength3}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Min. lay length</td>
+                <td>{{ (previewOperationModel.minLayLength3)}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Max. lay length</td>
+                <td>{{ previewOperationModel.maxLayLength3}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Direction</td>
+                <td>{{previewOperationModel.direction3}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <td>Layer 4 for Stranding/Bunching</td>
+                <td></td>
+                <td>SU,SV,SD</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>No. of wire for each layer </td>
+                <td>24</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Die Diameter</td>
+                <td>{{previewOperationModel.dieDiamater4}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Min. Diameter</td>
+                <td>{{previewOperationModel.dieDiamater4}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Max. Diameter</td>
+                <td>{{previewOperationModel.maxDieDiamater4}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Lay length</td>
+                <td>{{previewOperationModel.layLength4}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Min. lay length</td>
+                <td>{{ previewOperationModel.minLayLength4}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Max. lay length</td>
+                <td>{{ previewOperationModel.maxLayLength4}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Direction</td>
+                <td>{{previewOperationModel.direction4}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+
+
+              <tr>
+                <td>Compaction</td>
+                <td><span *ngIf="previewOperationModel.compaction.compactionTitle=='Yes';else noCompaction">
+                    90
+                  </span>
+
+                  <ng-template #noCompaction>
+                    <span>
+                      ---
+                    </span>
+                  </ng-template>
+                </td>
+                <td>%</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Spiral</td>
+                <td><span *ngIf="previewOperationModel.shape.conductorShapeTitle=='Sector';else spiralTemp">
+                    35*Cabling
+                  </span>
+                  <ng-template #spiralTemp>
+                    <span>
+                      ---
+                    </span>
+                  </ng-template>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Mold angle</td>
+                <td>No. of cores from cabling</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>180 degree</td>
+                <td><span
+                    *ngIf="previewOperationModel.shape.conductorShapeTitle=='Sector' && previewOperationModel.compaction.compactionTitle.includes('180') else not180">
+                    2
+                  </span>
+                  <ng-template #not180>
+                    <span>
+                      ---
+                    </span>
+                  </ng-template>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>120 degree</td>
+                <td><span
+                    *ngIf="previewOperationModel.shape.conductorShapeTitle=='Sector' && previewOperationModel.compaction.compactionTitle.includes('120') else not120">
+                    3
+                  </span>
+                  <ng-template #not120>
+                    <span>
+                      ---
+                    </span>
+                  </ng-template>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>100 degree</td>
+                <td><span
+                    *ngIf="previewOperationModel.shape.conductorShapeTitle=='Sector' && previewOperationModel.compaction.compactionTitle.includes('100') else not100">
+                    3.5
+                  </span>
+                  <ng-template #not100>
+                    <span>
+                      ---
+                    </span>
+                  </ng-template>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>90 degree</td>
+                <td><span
+                    *ngIf="previewOperationModel.shape.conductorShapeTitle=='Sector' && previewOperationModel.compaction.compactionTitle.includes('90') else not90">
+                    4.5
+                  </span>
+                  <ng-template #not90>
+                    <span>
+                      ---
+                    </span>
+                  </ng-template>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>60 degree</td>
+                <td><span
+                    *ngIf="previewOperationModel.shape.conductorShapeTitle=='Sector' && previewOperationModel.compaction.compactionTitle.includes('60') else not60">
+                    3.5
+                  </span>
+                  <ng-template #not60>
+                    <span>
+                      ---
+                    </span>
+                  </ng-template>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>45 degree</td>
+                <td><span
+                    *ngIf="previewOperationModel.shape.conductorShapeTitle=='Sector' && previewOperationModel.compaction.compactionTitle.includes('45') else not45">
+                    5
+                  </span>
+                  <ng-template #not45>
+                    <span>
+                      ---
+                    </span>
+                  </ng-template>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+
+
+
+              <tr>
+                <td>
+                  Machinery group
+                </td>
+                <td colspan="3" class="text-left">
+                  Stranding
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <div>
+          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button matStepperNext (click)="PreviewDrawingOperation()" color="primary">Ok
+          </button>
+        </div>
+
+
+      </mat-step>
+
+
+      <mat-step>
+
+        <ng-template matStepLabel>Preview Drawing Operation</ng-template>
+        <div class="row text-center" style="margin:auto" *ngIf="previewDrawingOperationModel!=null">
+
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <td>Attribute</td>
+                <td>Value</td>
+                <td>Process name</td>
+                <td>Unit</td>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Nom. Wire diameter </td>
+                <td>{{previewDrawingOperationModel.wireDiameter.wireDiameterTitle}}</td>
+                <td> </td>
+                <td>mm</td>
+
+              </tr>
+              <tr>
+                <td>Annealing </td>
+                <td>{{previewDrawingOperationModel.anneal.annealTitle}}</td>
+                <td> </td>
+                <td>%</td>
+
+              </tr>
+              <tr>
+                <td>Die series for wire diameter </td>
+                <td>
+                  <span *ngFor="let item of previewDrawingOperationModel.dieSerriesList">
+                    {{item.dieSerriesTitle}}
+                  </span>
+                </td>
+                <td> DX, DP,DN,…</td>
+                <td>mm</td>
+
+              </tr>
+              <tr>
+                <td>
+                  Machinery group
+                </td>
+                <td colspan="3" class="text-left">
+                  Drawing
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+        </div>
+        <div>
+          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button matStepperNext color="primary">Ok
+          </button>
+        </div>
+
+
+      </mat-step>
+
+
+
+
+
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Success!</strong> Information saved successfully.
+        </div>
+        <div>
+          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button (click)="Done()" color="primary">Next Stage</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-card-content>
+
+</mat-card>

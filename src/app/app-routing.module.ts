@@ -6,15 +6,16 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ExpireComponent } from './expire/expire.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+
   { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'error', component: ErrorPageComponent },
   { path: 'expire', component: ExpireComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

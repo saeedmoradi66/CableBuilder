@@ -1,0 +1,123 @@
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+
+            <div>Conductor
+                <div class="page-title-subheading">Insert and Update Conductor Operation Form.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<mat-card class="Designcard">
+
+
+    <mat-card-content>
+
+        <div class="alert alert-danger" *ngIf="isValid==false">
+
+
+            You must first complete the previous steps, then enter this form
+        </div>
+        <mat-horizontal-stepper linear #stepper *ngIf="isValid">
+            <!-- #docregion editable -->
+
+            <mat-step>
+
+                <ng-template matStepLabel>Preview Conductor Operation</ng-template>
+                <div class="row text-center" style="margin:auto" *ngIf="previewModel!=null">
+                    <div class="col-sm-3 text-left label">
+                        Cross Section :
+                    </div>
+                    <div class="col-sm-3 text-left fieldValue">
+                        {{crossSection.crossSectionTitle}}
+                    </div>
+                    <div class="col-sm-3 text-left label">
+                        Anneal:
+                    </div>
+                    <div class="col-sm-3 text-left fieldValue">
+                        <ul>
+                            <li *ngFor="let item of annealList">
+                                {{item.annealTitle}}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-3 text-left label">
+                        Wire Diameter :
+                    </div>
+                    <div class="col-sm-3 text-left fieldValue">
+                        <ul>
+                            <li>
+                                {{wireDiameter.wireDiameterTitle}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3 text-left label">
+                        Number of Wire :
+                    </div>
+                    <div class="col-sm-3 text-left fieldValue">
+                    <ul>
+                        <li>
+                            {{numberWire.numberWireTitle}}
+                        </li>
+                    </ul>
+                    </div>
+                    <div class="col-sm-3 text-left label">
+                        Die Serries :
+                    </div>
+                    <div class="col-sm-3 text-left fieldValue">
+                    <ul>
+                        <li *ngFor="let item of dieSerriesList">
+                            {{item.dieSerriesTitle}}
+                        </li>
+                    </ul>
+                    </div>
+                    <div class="col-sm-3 text-left label">
+                        Lay Length :
+                    </div>
+                    <div class="col-sm-3 text-left fieldValue">
+                    <ul>
+                        <li *ngFor="let item of layLengthList">
+                            {{item.layLengthTitle}}
+                        </li>
+                    </ul>
+                    </div>
+                    <div class="col-sm-3 text-left label">
+                        Resistance :
+                    </div>
+                    <div class="col-sm-3 text-left fieldValue">
+                        <ul>
+                            <li *ngFor="let item of conductorResistanceList">
+                                {{item.conductorResistanceTitle}}
+                            </li>
+                        </ul>
+                    </div>
+
+
+                </div>
+                <div>
+                   
+                    <button mat-raised-button matStepperNext color="primary">Ok
+                    </button>
+                </div>
+
+
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Success!</strong> Information saved successfully.
+                </div>
+                <div>
+                    <button mat-raised-button matStepperPrevious>Back</button>
+                    <button mat-raised-button (click)="Done()" color="primary">Next Stage</button>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </mat-card-content>
+
+</mat-card>

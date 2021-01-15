@@ -14,11 +14,11 @@ export class DashboardService {
   constructor(private http: HttpClient,
 
     @Inject(APP_CONFIG) private appConfig: IAppConfig) { }
-  
-  Get(model: Dashboard): Observable<Dashboard> {
-    
+
+  Get(id: number): Observable<Dashboard> {
+
     return this.http
-      .post(`${this.appConfig.apiEndpoint}/` + 'dashboard/Get', model)
+      .get(`${this.appConfig.apiEndpoint}/` + 'dashboard/Get?id=' + id)
       .pipe(
         map((response: any) => {
           return response;

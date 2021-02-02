@@ -16,6 +16,7 @@ import { ConductorType } from 'src/app/core/models/ConductorType';
 import { CrossSection } from 'src/app/core/models/CrossSection';
 import { Density } from 'src/app/core/models/Density';
 import { DieSerries } from 'src/app/core/models/DieSerries';
+import { GeneralModel } from 'src/app/core/models/GeneralModel';
 import { HypotheticalDiameter } from 'src/app/core/models/HypotheticalDiameter';
 import { LayLength } from 'src/app/core/models/LayLength';
 import { NumberWire } from 'src/app/core/models/NumberWire';
@@ -37,6 +38,7 @@ import { ConductorShapeService } from 'src/app/core/services/ConductorShape.serv
 import { ConductorTypeService } from 'src/app/core/services/ConductorType.service';
 import { CrossSectionService } from 'src/app/core/services/CrossSection.service';
 import { DensityService } from 'src/app/core/services/Density.service';
+import { GeneralService } from 'src/app/core/services/General.service';
 import { HypotheticalDiameterService } from 'src/app/core/services/HypotheticalDiameter.service';
 import { NumberWireService } from 'src/app/core/services/NumberWire.service';
 import { OhmicResistanceService } from 'src/app/core/services/OhmicResistance.service';
@@ -100,6 +102,7 @@ export class ConductorComponent implements OnInit {
   isLoading: boolean = false;
   isValid: boolean = true;
   conductorCode: string = "";
+  generalModel: GeneralModel;
   constructor(private conductorService: ConductorsService,
     private conductorOperationService: ConductorOperationService,
     private ConductorShapeService: ConductorShapeService,
@@ -122,7 +125,8 @@ export class ConductorComponent implements OnInit {
     private numberWireService: NumberWireService,
     private _gloablService: GlobalService,
     private browserStorageService: BrowserStorageService,
-    private router: Router) { }
+    private router: Router,
+    private generalService: GeneralService) { }
 
   conductorShapeID = new FormControl('');
   conductorTypeID = new FormControl('', [Validators.required, Validators.min(1)]);
@@ -203,6 +207,7 @@ export class ConductorComponent implements OnInit {
     this.GetCompaction();
     this.GetMinExDia();
     this.GetMaxExDia();
+   
     if (this._gloablService.CableBuilderNo == 0 && this.browserStorageService.getSession("CableBuilderNo") != null) {
       this._gloablService.CableBuilderNo = parseInt(this.browserStorageService.getSession("CableBuilderNo"));
     }
@@ -210,12 +215,22 @@ export class ConductorComponent implements OnInit {
       this._gloablService.TempID = parseInt(this.browserStorageService.getSession("TempID"));
     }
     if (this._gloablService.CableBuilderNo > 0 || this._gloablService.TempID > 0) {
+      this.GetGeneralData();
       this.GetData();
     }
     else {
       this.isValid = false;
     }
     this.disable();
+
+  }
+
+  GetGeneralData() {
+    this.generalService.Get(this._gloablService.CableBuilderNo, this._gloablService.TempID)
+      .subscribe(response => {
+        this.generalModel = response;
+      }
+      );
   }
 
   GetCompaction() {
@@ -617,7 +632,8 @@ export class ConductorComponent implements OnInit {
       if (this.model.numberWireID != null)
         this.numberWireID.setValue(this.model.numberWireID.toString());
 
-      this.conductorCode = this.model.conductorMaterial.conductorMaterialTitle + ' - ' + this.model.crossSection.crossSectionTitle + ' - ' + this.model.conductorClass.conductorClassTitle + ' - ' + this.model.conductorShape.conductorShapeTitle;
+      this.conductorCode =this.model.compaction.compactionTitle+' - '+ this.model.conductorMaterial.conductorMaterialTitle + ' - ' + this.model.crossSection.crossSectionTitle + ' - ' + this.model.conductorClass.conductorClassTitle + ' - ' + this.model.conductorShape.conductorShapeTitle+'/I';
+
     }
     else {
 
@@ -654,6 +670,12 @@ export class ConductorComponent implements OnInit {
 
       this.numberWireID.setValue(0);
 
+    }
+    if (this.generalModel.cableTypeID == 2) {
+
+      this.conductorClassID.setValue("2");
+      this.conductorClassID.disable();
+      this.conductorShapeID.setValue("1");
     }
   }
 

@@ -131,7 +131,7 @@
             <div class="col-sm-3 text-center">
               <mat-form-field appearance="fill">
                 <mat-label> Shape</mat-label>
-                <select matNativeControl formControlName="conductorShapeID" [disabled]="true">
+                <select matNativeControl formControlName="conductorShapeID" >
                   <option value="0">---</option>
                   <option *ngFor="let item of ConductorShapeList" [value]="item.conductorShapeId">
                     {{item.conductorShapeTitle}}
@@ -553,7 +553,7 @@
               <tr>
                 <td>Cross Section</td>
                 <td>{{previewOperationModel.crossSection.crossSectionTitle}}</td>
-                <td> </td>
+                <td>{{previewOperationModel.processName}}</td>
                 <td>mm2</td>
 
               </tr>
@@ -1006,7 +1006,7 @@
               <tr>
                 <td>Nom. Wire diameter </td>
                 <td>{{previewDrawingOperationModel.wireDiameter.wireDiameterTitle}}</td>
-                <td> </td>
+                <td>{{previewDrawingOperationModel.processName}}</td>
                 <td>mm</td>
 
               </tr>

@@ -88,4 +88,5 @@ export class Conductors {
     maxExDiaID: number;
     maxExDia: ConductorActualDiameter;
     conductorCode: string;
+    
 }

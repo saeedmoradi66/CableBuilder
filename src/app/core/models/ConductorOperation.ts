@@ -51,4 +51,5 @@ export class ConductorOperation {
     direction2: string;
     direction3: string;
     direction4: string;
+    processName: string;
 }

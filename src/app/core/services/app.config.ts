@@ -15,8 +15,8 @@ export interface IAppConfig {
 }
 
 export const AppConfig: IAppConfig = {
-  apiEndpoint: 'http://localhost:63098/api',
-  // apiEndpoint: 'http://91.98.113.181/cablebuilderapi/api',
+  // apiEndpoint: 'http://localhost:63098/api',
+  apiEndpoint: 'http://91.98.113.181/cablebuilderapi/api',
   apiSettingsPath: 'ApiSettings',
   loginPath: 'account/login',
   logoutPath: 'account/logout',

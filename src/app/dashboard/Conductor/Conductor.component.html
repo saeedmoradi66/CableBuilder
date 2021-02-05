@@ -33,13 +33,13 @@
           <ng-template matStepLabel>Fill Conductor Form</ng-template>
           <!-- #enddocregion step-label -->
           <div class="row text-center" style="margin:auto">
-            <div class="col-sm-3 text-left ">
+            <div class="col-sm-2 text-left ">
 
 
               <!-- <mat-slide-toggle color="primary" formControlName="compaction">Compaction</mat-slide-toggle> -->
               <mat-form-field appearance="fill">
                 <mat-label> Compaction</mat-label>
-                <select matNativeControl (change)="changeCompaction($event.target.value)"
+                <select matNativeControl (change)="changeCompaction($event)"
                   formControlName="compactionID">
                   <option *ngFor="let item of compactionList" [value]="item.compactionID">
                     {{item.compactionTitle}}
@@ -50,7 +50,7 @@
               </mat-form-field>
 
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
               <mat-form-field appearance="fill">
                 <mat-label> Class</mat-label>
                 <select matNativeControl (change)="FilterCross($event.target.value)" formControlName="conductorClassID">
@@ -62,7 +62,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <mat-form-field appearance="fill">
                 <mat-label> Material</mat-label>
                 <select matNativeControl (change)="changeMaterial($event.target.value)"
@@ -75,7 +75,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-sm-3 ">
+            <div class="col-sm-2">
               <mat-form-field appearance="fill">
                 <mat-label>Cross Section</mat-label>
                 <select matNativeControl (change)="changeCross($event.target.value)" formControlName="crossSectionID">
@@ -91,7 +91,7 @@
             </div>
 
 
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <mat-form-field appearance="fill">
                 <mat-label> Type</mat-label>
                 <select matNativeControl formControlName="conductorTypeID">
@@ -104,7 +104,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <mat-form-field appearance="fill">
                 <mat-label>Standard</mat-label>
                 <select matNativeControl formControlName="standardID">
@@ -116,7 +116,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <mat-form-field appearance="fill">
                 <mat-label>Product</mat-label>
                 <select matNativeControl formControlName="productsID">
@@ -128,10 +128,10 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-sm-3 text-center">
+            <div class="col-sm-2 text-center">
               <mat-form-field appearance="fill">
                 <mat-label> Shape</mat-label>
-                <select matNativeControl formControlName="conductorShapeID" >
+                <select matNativeControl formControlName="conductorShapeID">
                   <option value="0">---</option>
                   <option *ngFor="let item of ConductorShapeList" [value]="item.conductorShapeId">
                     {{item.conductorShapeTitle}}
@@ -141,7 +141,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <mat-form-field appearance="fill">
                 <mat-label> Abbreviation</mat-label>
                 <select matNativeControl formControlName="abbreviationID" [disabled]="true">
@@ -154,7 +154,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <mat-form-field appearance="fill">
                 <mat-label> No Of Wire</mat-label>
                 <select matNativeControl formControlName="numberWireID" [disabled]="true">
@@ -167,7 +167,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <mat-form-field appearance="fill">
                 <mat-label> Wire Diameter</mat-label>
                 <select matNativeControl formControlName="wireDiameterID" [disabled]="true">
@@ -181,7 +181,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <mat-form-field appearance="fill">
                 <mat-label> Density</mat-label>
                 <select matNativeControl formControlName="densityID" [disabled]="true">
@@ -194,7 +194,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
               <mat-form-field appearance="fill">
                 <mat-label> Resistance</mat-label>
                 <select matNativeControl formControlName="ohmicResistanceID" [disabled]="true">
@@ -207,7 +207,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <mat-form-field appearance="fill">
                 <mat-label>Weight</mat-label>
                 <select matNativeControl formControlName="weightID" [disabled]="true">
@@ -220,7 +220,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <mat-form-field appearance="fill">
                 <mat-label>Exact dia</mat-label>
                 <select matNativeControl formControlName="conductorActualDiameterID" [disabled]="true">
@@ -234,7 +234,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <mat-form-field appearance="fill">
                 <mat-label>Width Exact dia</mat-label>
                 <select matNativeControl formControlName="minExDiaID" [disabled]="true">
@@ -248,7 +248,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <mat-form-field appearance="fill">
                 <mat-label>Height Exact dia</mat-label>
                 <select matNativeControl formControlName="maxExDiaID" [disabled]="true">
@@ -262,7 +262,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <mat-form-field appearance="fill">
                 <mat-label>Fic dia</mat-label>
                 <select matNativeControl formControlName="hypotheticalDiameterID" [disabled]="true">
@@ -349,7 +349,7 @@
                 </mat-error>
               </mat-form-field>
             </div> -->
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <mat-form-field appearance="fill">
                 <mat-label>Wastage</mat-label>
                 <select matNativeControl formControlName="wastageID" [disabled]="true">
@@ -361,7 +361,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <mat-form-field appearance="fill">
                 <mat-label>Price</mat-label>
                 <select matNativeControl formControlName="priceID" [disabled]="true">
@@ -372,6 +372,9 @@
                 <mat-error *ngIf="priceID.hasError('required')">Please choose an Price
                 </mat-error>
               </mat-form-field>
+            </div>
+            <div class="col-sm-8 ">
+
             </div>
             <!-- <div class="col-sm-3 ">
               <mat-form-field appearance="fill">
@@ -418,8 +421,8 @@
 
         <ng-template matStepLabel>Preview Conductor</ng-template>
 
-        <div class="row text-center" style="margin:auto" *ngIf="previewModel!=null">
-          <table class="table table-striped table-bordered">
+        <div class="d-flex justify-content-center" style="margin:auto" *ngIf="previewModel!=null">
+          <table class="table table-striped table-bordered" style="width:50%">
             <tbody>
               <tr>
                 <td>Class</td>
@@ -515,7 +518,7 @@
 
         </div>
         <div>
-          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button matStepperPrevious class="mr-1">Back</button>
           <button mat-raised-button matStepperNext (click)="PreviewConductorOperation()" color="primary">Ok
           </button>
         </div>
@@ -525,8 +528,8 @@
       <mat-step>
 
         <ng-template matStepLabel>Preview Conductor Operation</ng-template>
-        <div class="row text-center" style="margin:auto" *ngIf="previewOperationModel!=null">
-          <table class="table table-bordered table-striped">
+        <div class="d-flex justify-content-center" style="margin:auto" *ngIf="previewOperationModel!=null">
+          <table class="table table-bordered table-striped" style="width:50%">
             <thead>
               <tr>
                 <td>Attribute</td>
@@ -965,7 +968,7 @@
 
         </div>
         <div>
-          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button matStepperPrevious class="mr-1">Back</button>
           <button mat-raised-button matStepperNext (click)="PreviewDrawingOperation()" color="primary">Ok
           </button>
         </div>
@@ -977,9 +980,9 @@
       <mat-step>
 
         <ng-template matStepLabel>Preview Drawing Operation</ng-template>
-        <div class="row text-center" style="margin:auto" *ngIf="previewDrawingOperationModel!=null">
+        <div class="d-flex justify-content-center" style="margin:auto" *ngIf="previewDrawingOperationModel!=null">
 
-          <table class="table table-bordered table-striped">
+          <table class="table table-bordered table-striped" style="width:50%">
             <thead>
               <tr>
                 <td>Attribute</td>
@@ -1029,7 +1032,7 @@
 
         </div>
         <div>
-          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button matStepperPrevious class="mr-1">Back</button>
           <button mat-raised-button matStepperNext color="primary">Ok
           </button>
         </div>
@@ -1044,7 +1047,7 @@
           <strong>Success!</strong> Information saved successfully.
         </div>
         <div>
-          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button matStepperPrevious class="mr-1">Back</button>
           <button mat-raised-button (click)="Done()" color="primary">Next Stage</button>
         </div>
       </mat-step>

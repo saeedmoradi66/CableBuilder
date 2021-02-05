@@ -140,7 +140,7 @@ export class ConductorComponent implements OnInit {
   minExDiaID = new FormControl('');
   maxExDiaID = new FormControl('');
   //conductorActualDiameterUnitID = new FormControl('', Validators.required);
-  standardID = new FormControl('', [Validators.required, Validators.min(1)]);
+  standardID = new FormControl('1', [Validators.required, Validators.min(1)]);
   wastageID = new FormControl('');
   //wastageUnitID = new FormControl('', Validators.required);
   priceID = new FormControl('');
@@ -207,7 +207,7 @@ export class ConductorComponent implements OnInit {
     this.GetCompaction();
     this.GetMinExDia();
     this.GetMaxExDia();
-   
+
     if (this._gloablService.CableBuilderNo == 0 && this.browserStorageService.getSession("CableBuilderNo") != null) {
       this._gloablService.CableBuilderNo = parseInt(this.browserStorageService.getSession("CableBuilderNo"));
     }
@@ -547,8 +547,15 @@ export class ConductorComponent implements OnInit {
 
   }
 
-  changeCompaction(compactionID) {
-    let classID = parseInt(this.conductorClassID.value);
+  changeCompaction(event) {
+    let compactionID = event.target.value;
+    let text = event.target.options[event.target.options.selectedIndex].text;
+    let classID = 0
+    if (text.toLowerCase() == "yes") {
+      classID = 2;
+      this.conductorClassID.setValue(classID.toString());
+    }
+    classID = parseInt(this.conductorClassID.value);
     //let crossID = parseInt(this.crossSectionID.value);
     let materialID = parseInt(this.conductorMaterialID.value);
     if (classID > 0 && compactionID > 0 && materialID > 0) {
@@ -632,8 +639,8 @@ export class ConductorComponent implements OnInit {
       if (this.model.numberWireID != null)
         this.numberWireID.setValue(this.model.numberWireID.toString());
 
-      this.conductorCode =this.model.compaction.compactionTitle+' - '+ this.model.conductorMaterial.conductorMaterialTitle + ' - ' + this.model.crossSection.crossSectionTitle + ' - ' + this.model.conductorClass.conductorClassTitle + ' - ' + this.model.conductorShape.conductorShapeTitle+'/I';
 
+      this.conductorCode = this.model.conductorMaterial.conductorMaterialTitle + ' - ' + this.model.crossSection.crossSectionTitle + ' - ' + this.model.conductorClass.conductorClassTitle + ' - ' + this.model.abbreviation.abbreviationTitle + ' - ' + this.model.compaction.compactionTitle + '/I';
     }
     else {
 
@@ -740,7 +747,7 @@ export class ConductorComponent implements OnInit {
     this.minExDiaID.disable();
     this.maxExDiaID.disable();
     this.abbreviationID.disable();
-    this.conductorShapeID.disable();
+    //this.conductorShapeID.disable();
   }
   r: string;
   PreviewConductorOperation() {

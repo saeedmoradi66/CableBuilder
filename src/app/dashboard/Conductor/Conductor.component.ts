@@ -554,6 +554,11 @@ export class ConductorComponent implements OnInit {
     if (text.toLowerCase() == "yes") {
       classID = 2;
       this.conductorClassID.setValue(classID.toString());
+      this.conductorClassID.disable();
+    }
+    else
+    {
+      this.conductorClassID.enable();
     }
     classID = parseInt(this.conductorClassID.value);
     //let crossID = parseInt(this.crossSectionID.value);

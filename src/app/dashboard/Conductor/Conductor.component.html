@@ -510,6 +510,32 @@
                 <td>Compaction</td>
                 <td>{{previewModel.compaction.compactionTitle}}</td>
               </tr>
+              <tr>
+                <td>Width Exact dia</td>
+                <td>
+                
+                  <span *ngIf="previewModel.minExDia!=null;else noMinEX">
+                    {{previewModel.minExDia.conductorActualDiameterTitle}}
+                  </span>
+                  <ng-template #noMinEX>
+                    <span>
+                      ---
+                    </span>
+                  </ng-template>
+                </td>
+                <td>Height Exact dia</td>
+                <td>
+              
+                  <span *ngIf="previewModel.maxExDia!=null;else noMaxEX">
+                    {{previewModel.maxExDia.conductorActualDiameterTitle}}
+                  </span>
+                  <ng-template #noMaxEX>
+                    <span>
+                      ---
+                    </span>
+                  </ng-template>
+                </td>
+              </tr>
 
             </tbody>
           </table>

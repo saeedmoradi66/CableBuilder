@@ -688,7 +688,20 @@ export class ConductorComponent implements OnInit {
       this.conductorClassID.setValue("2");
       this.conductorClassID.disable();
       this.conductorShapeID.setValue("1");
+      this.conductorShapeID.disable();
+      this.compactionID.setValue("2");
+      this.compactionID.disable();
     }
+    else if (this.generalModel.cableTypeID == 3) {
+
+      this.conductorClassID.setValue("2");
+      this.conductorClassID.disable();
+      this.conductorShapeID.setValue("1");
+      this.conductorShapeID.disable();
+      this.compactionID.setValue("1");
+      this.compactionID.disable();
+    }
+
   }
 
   submitForm() {

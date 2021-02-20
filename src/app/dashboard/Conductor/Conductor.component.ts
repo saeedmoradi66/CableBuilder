@@ -694,8 +694,7 @@ export class ConductorComponent implements OnInit {
     }
     else if (this.generalModel.cableTypeID == 3) {
 
-      this.conductorClassID.setValue("2");
-      this.conductorClassID.disable();
+      
       this.conductorShapeID.setValue("1");
       this.conductorShapeID.disable();
       this.compactionID.setValue("1");
